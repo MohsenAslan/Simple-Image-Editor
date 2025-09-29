@@ -4,25 +4,25 @@ using namespace std;
 
 
 //filter11 resize 
-viod resize (Image &img ,int newWidth,int newHeight ){
+//viod resize (Image &img ,int newWidth,int newHeight ){
 
-    Image resized(newWidth, newHeight);
+  //  Image resized(newWidth, newHeight);
   
-    float xr = (float) img.width / newWidth;
-    float yr = (float) img.height / newHeight;
+    //float xr = (float) img.width / newWidth;
+    //float yr = (float) img.height / newHeight;
 
-    for (int i = 0; i < newWidth; i++) {
-        for (int j = 0; j < newHeight; j++) {
-            int srcX = (int)(i * xr );
-            int srcY = (int)(j * yr );
+   // for (int i = 0; i < newWidth; i++) {
+     //   for (int j = 0; j < newHeight; j++) {
+       //     int srcX = (int)(i * xr );
+         //   int srcY = (int)(j * yr );
 
-            for (int k = 0; k < img.channels; k++) {
-                resized(j, i, k) = img(srcY, srcX, k);
-            }
-        }
-    }
-    img = resized;
-}
+           // for (int k = 0; k < img.channels; k++) {
+             //   resized(j, i, k) = img(srcY, srcX, k);
+            //}
+        //}
+    //}
+    //img = resized;
+//}
 
 
 //filter2 black&white
@@ -123,13 +123,6 @@ void rotateImage(Image &image, int degree) {
 }
 
 
-
-
-
-
-
-
-
 // filter5 flip (H)
 void flipHorizontal(Image &img) {
     
@@ -158,49 +151,67 @@ void flipVertical(Image &img) {
     }
 }
 //filter8 crop
-void crop(Image &img, int x, int y, int width, int height) {
+//void crop(Image &img, int x, int y, int width, int height) {
     
-    Image cropped(width, height);
+   // Image cropped(width, height);
 
-    for (int i = 0; i < width; i++) {
+   // for (int i = 0; i < width; i++) {
         
-        for (int j = 0; j < height; j++) {
+      //  for (int j = 0; j < height; j++) {
             
-            for (int k = 0; k < img.channels; k++) {
+        //    for (int k = 0; k < img.channels; k++) {
                 
-                cropped(j, i, k) = img(y + j, x + i, k);
-            }
-        }
-    }
+              //  cropped(j, i, k) = img(y + j, x + i, k);
+          //  }
+        //}
+  //  }
 
-    img = cropped; 
-}
-filter 1 grayscal
+  //  img = cropped; 
+//}
+
+
+//filter 1 grayscal
 void toGray(Image &img) {
+    
     for (int i = 0; i < img.width; i++) {
+        
         for (int j = 0; j < img.height; j++) {
+            
             unsigned int avg = 0;
+            
             for (int k = 0; k < 3; k++) {
+                
                 avg += img(i, j, k);
             }
+            
             avg /= 3;
+            
             for (int k = 0; k < 3; k++) {
+                
                 img(i, j, k) = avg;
             }
         }
     }
 }
-filter 4 merge
+//filter 4 merge
 void mergeImages(Image &img1, Image &img2, Image &output) {
+    
     int width = min(img1.width, img2.width);
+    
     int height = min(img1.height, img2.height);
+    
     output = Image(width, height);
 
     for (int i = 0; i < width; i++) {
+        
         for (int j = 0; j < height; j++) {
+            
             for (int k = 0; k < 3; k++) {
+                
                 int a = img1(i, j, k);
+                
                 int b = img2(i, j, k);
+                
                 output(i, j, k) = (a + b) / 2;
             }
         }
