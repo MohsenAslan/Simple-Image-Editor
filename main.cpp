@@ -46,7 +46,6 @@ void blackWhite(Image &img) {
             }
         }
     }
-    img = blackWhite;
 }
 
 // filter5 flip (H)
@@ -62,9 +61,8 @@ void flipHorizontal(Image &img) {
             }
         }
     }
-    img = flipHorizontal;
 }
-//(v)
+// filter5 (v)
 void flipVertical(Image &img) {
      for (int i = 0; i < img.width; i++) {
          
@@ -76,7 +74,24 @@ void flipVertical(Image &img) {
             }
         }
     }
-    img = flipVertical;
+}
+//filter8 crop
+void crop(Image &img, int x, int y, int width, int height) {
+    
+    Image cropped(width, height);
+
+    for (int i = 0; i < width; i++) {
+        
+        for (int j = 0; j < height; j++) {
+            
+            for (int k = 0; k < img.channels; k++) {
+                
+                cropped(j, i, k) = img(y + j, x + i, k);
+            }
+        }
+    }
+
+    img = cropped; 
 }
 
 
