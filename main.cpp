@@ -175,7 +175,38 @@ void crop(Image &img, int x, int y, int width, int height) {
 
     img = cropped; 
 }
+filter 1
+void toGray(Image &img) {
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            unsigned int avg = 0;
+            for (int k = 0; k < 3; k++) {
+                avg += img(i, j, k);
+            }
+            avg /= 3;
+            for (int k = 0; k < 3; k++) {
+                img(i, j, k) = avg;
+            }
+        }
+    }
+}
+filter 4
+void mergeImages(Image &img1, Image &img2, Image &output) {
+    int width = min(img1.width, img2.width);
+    int height = min(img1.height, img2.height);
+    output = Image(width, height);
 
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            for (int k = 0; k < 3; k++) {
+                int a = img1(i, j, k);
+                int b = img2(i, j, k);
+                output(i, j, k) = (a + b) / 2;
+            }
+        }
+    }
+}
+   
 
 
 
