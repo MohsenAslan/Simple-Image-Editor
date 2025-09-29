@@ -51,7 +51,7 @@ void blackWhite(Image &img) {
 
 
 // filter3 invert 
-void negativeFilter(Image &image) {
+void invert(Image &image) {
     
     for (int i = 0; i < image.width; i++) {
         
