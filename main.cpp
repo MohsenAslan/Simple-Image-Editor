@@ -175,7 +175,7 @@ void crop(Image &img, int x, int y, int width, int height) {
 
     img = cropped; 
 }
-filter 1
+filter 1 grayscal
 void toGray(Image &img) {
     for (int i = 0; i < img.width; i++) {
         for (int j = 0; j < img.height; j++) {
@@ -190,7 +190,7 @@ void toGray(Image &img) {
         }
     }
 }
-filter 4
+filter 4 merge
 void mergeImages(Image &img1, Image &img2, Image &output) {
     int width = min(img1.width, img2.width);
     int height = min(img1.height, img2.height);
