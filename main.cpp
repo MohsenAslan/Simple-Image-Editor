@@ -194,30 +194,23 @@ void toGray(Image &img) {
     }
 }
 //filter 4 merge
-void mergeImages(Image &img1, Image &img2, Image &output) {
-    
+void mergeImages(Image &img1, Image &img2) {
     int width = min(img1.width, img2.width);
-    
     int height = min(img1.height, img2.height);
-    
-    output = Image(width, height);
+    Image output(width, height);
 
     for (int i = 0; i < width; i++) {
-        
         for (int j = 0; j < height; j++) {
-            
             for (int k = 0; k < 3; k++) {
-                
                 int a = img1(i, j, k);
-                
                 int b = img2(i, j, k);
-                
                 output(i, j, k) = (a + b) / 2;
             }
         }
     }
+    img1 = output; 
 }
-   
+
 
 
 
