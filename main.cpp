@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "Image_Class.h"
+#include <fstream>
 using namespace std;
 
 
