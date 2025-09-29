@@ -229,8 +229,235 @@ void mergeImages(Image &img1, Image &img2) {
 
 
 
+bool FileName(const string &name) {
+
+    return (name.ends_with(".jpg") || name.ends_with(".bmp") || name.ends_with(".png"));
+}
+
+void Menu() {
+
+    cout << "1. Load new image\n";
+
+    cout << "2. Filter  // GrayScale\n";
+
+    cout << "3. Filter  // BlackWhite\n";
+
+    cout << "4. Filter  // Invert\n";
+
+    cout << "5. Filter  // Merge\n";
+
+    cout << "6. Filter  // Flip\n";
+
+    cout << "7. Filter  // Rotate\n";
+
+    cout << "8. Save image\n";
+
+    cout << "9. Exit\n\n\n";
+
+}
+
+
+
+
 int main() {
-  
+
+   string fileName;
+
+    cout << "Please enter the file name: ";
+
+    cin >> fileName;
+
+    while (!FileName(fileName) || !ifstream(fileName).good()) {
+
+        cout << "Error: Invalid file. Please enter a valid file name: ";
+
+        cin >> fileName;
+    }
+
+    Image img(fileName), img2;
+
+    bool test = true;
+
+    while (test) {
+
+        Menu();
+
+        int num;
+
+        cout << "Please enter the operation number: ";
+
+        cin >> num;
+
+        switch (num) {
+
+            case 1: {
+                cout << "Do you want to save the current image before loading new one? (y/n): ";
+
+                char saveChoice;
+
+                cin >> saveChoice;
+
+                if (saveChoice == 'y' || saveChoice == 'Y') {
+
+                    string saveName;
+
+                    cout << "Enter file name to save: ";
+
+                    cin >> saveName;
+
+                    if (!FileName(saveName)) {
+
+                        cout << "Invalid extension!\n";
+
+                    } else {
+
+                        img.saveImage(saveName);
+
+                        cout << "Image saved.\n";
+                    }
+                }
+
+                cout << "Enter new image file: ";
+
+                cin >> fileName;
+
+                while (!FileName(fileName) || !ifstream(fileName).good()) {
+
+                    cout << "Error: Invalid file. Enter new image file: ";
+
+                    cin >> fileName;
+                }
+
+                img.loadNewImage(fileName);
+
+                break;
+            }
+
+            case 2:
+                 toGray(img);
+                break;
+            case 3:
+                blackWhite(img);
+                break;
+             case 4:
+                invert(img);
+                break;
+            case 5: {
+                cout << "Enter second image file: ";
+                string fileName2;
+                cin >> fileName2;
+
+                while (!FileName(fileName2) || !ifstream(fileName2).good()) {
+
+                    cout << "Error: Invalid file. Enter second image file: ";
+
+                    cin >> fileName2;
+                }
+                img2.loadNewImage(fileName2);
+
+                mergeImages(img, img2);
+                break;
+            }
+
+            case 6: {
+                char choose;
+
+                cout << "H for horizontal flip, V for vertical flip: ";
+
+                cin >> choose;
+
+                if (choose == 'h' || choose == 'H') {
+
+                    flipHorizontal(img);
+                    break;
+                }
+                else if (choose == 'v' || choose == 'V'){
+
+                    flipVertical(img);
+                    break;
+                }
+            }
+
+            case 7: {
+                int angle;
+
+                cout << "Enter rotation angle (90, 180, 270): ";
+
+                cin >> angle;
+
+                rotateImage(img, angle);
+
+                break;
+            }
+
+            case 8: {
+
+                cout << "Save on same file (" << fileName << ")? (y/n): ";
+
+                char saveChoice;
+
+                cin >> saveChoice;
+
+                if (saveChoice == 'y' || saveChoice == 'Y') {
+
+                    img.saveImage(fileName);
+
+                } else {
+
+                    string saveName;
+
+                    cout << "Enter new file name: ";
+
+                    cin >> saveName;
+
+                    if (!FileName(saveName)) {
+
+                        cout << "Invalid extension!\n";
+
+                    } else {
+
+                        img.saveImage(saveName);
+                    }
+                }
+                break;
+            }
+
+            case 9: {
+
+                cout << "Do you want to save before exit? (y/n): ";
+
+                char saveChoice;
+
+                cin >> saveChoice;
+
+                if (saveChoice == 'y' || saveChoice == 'Y') {
+
+                    string saveName;
+
+                    cout << "Enter file name to save: ";
+
+                    cin >> saveName;
+
+                    if (FileName(saveName)) {
+
+                        img.saveImage(saveName);
+
+                        cout << "Image saved.\n";
+
+                    } else {
+                        cout << "Invalid extension. Exit without saving.\n";
+                    }
+                }
+                test = false;
+
+                break;
+            }
+          default: cout << "Invalid choice!\n"; break;
+        }
+    }
 
     return 0;
 }
+
+
+
