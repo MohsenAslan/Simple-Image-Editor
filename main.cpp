@@ -50,14 +50,15 @@ void blackWhite(Image &img) {
 
 
 
-\\ filter invert
-
-
-
+// filter3 invert 
 void negativeFilter(Image &image) {
+    
     for (int i = 0; i < image.width; i++) {
+        
         for (int j = 0; j < image.height; j++) {
+            
             for (int k = 0; k < 3; k++) {
+                
                 image(i, j, k) = 255 - image(i, j, k);
             }
         }
@@ -65,31 +66,38 @@ void negativeFilter(Image &image) {
 }
 
 
-\\ filter rotate
-
-#include "Image_Class.h"
-#include <iostream>
-using namespace std;
-
-
+//filter6 rotate
 void rotateImage(Image &image, int degree) {
+    
     if (degree == 90) {
+        
         int H = image.height, W = image.width;
+        
         Image rotated(H, W);
+        
         for (int i = 0; i < image.width; i++) {
+            
             for (int j = 0; j < image.height; j++) {
+                
                 for (int k = 0; k < 3; k++) {
+                    
                     rotated(j, i, k) = image(i, image.height - 1 - j, k);
                 }
             }
         }
         image = rotated;
     }
+        
     else if (degree == 180) {
+        
         Image rotated(image.width, image.height);
+        
         for (int i = 0; i < image.width; i++) {
+            
             for (int j = 0; j < image.height; j++) {
+                
                 for (int k = 0; k < 3; k++) {
+                    
                     rotated(i, j, k) = image(image.width - 1 - i, image.height - 1 - j, k);
                 }
             }
@@ -97,10 +105,15 @@ void rotateImage(Image &image, int degree) {
         image = rotated;
     }
     else if (degree == 270) {
+        
         Image rotated(image.height, image.width);
+        
         for (int i = 0; i < image.width; i++) {
+            
             for (int j = 0; j < image.height; j++) {
+                
                 for (int k = 0; k < 3; k++) {
+                    
                     rotated(j, i, k) = image(image.width - 1 - i, j, k);
                 }
             }
