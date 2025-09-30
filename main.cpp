@@ -210,25 +210,46 @@ void toGray(Image &img) {
     }
 }
 //filter 4 merge
-void mergeImages(Image &img1, Image &img2) {
-    int width = min(img1.width, img2.width);
-    int height = min(img1.height, img2.height);
-    Image output(width, height);
+Image resize(Image &img, int newWidth, int newHeight) {
+    Image resized(newWidth, newHeight);
+    float xr = (float)img.width / newWidth;
+    float yr = (float)img.height / newHeight;
+    for (int i = 0; i < newWidth; i++) {
+        for (int j = 0; j < newHeight; j++) {
+            int srcX = (int)(i * xr);
+            int srcY = (int)(j * yr);
+            for (int k = 0; k < img.channels; k++) {
+                resized(i, j, k) = img(srcX, srcY, k);
+            }
+        }
+    }
+    return resized;
+}
 
+Image mergeImages(Image &img1, Image &img2, int option) {
+    int width, height;
+    if (option == 1) {
+        width = max(img1.width, img2.width);
+        height = max(img1.height, img2.height);
+        img1 = resize(img1, width, height);
+        img2 = resize(img2, width, height);
+    } else {
+        width = min(img1.width, img2.width);
+        height = min(img1.height, img2.height);
+    }
+
+    Image output(width, height);
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            for (int k = 0; k < 3; k++) {
+            for (int k = 0; k < img1.channels; k++) {
                 int a = img1(i, j, k);
                 int b = img2(i, j, k);
                 output(i, j, k) = (a + b) / 2;
             }
         }
     }
-    img1 = output; 
+    return output;
 }
-
-
-
 
 bool FileName(const string &name) {
 
@@ -343,20 +364,29 @@ int main() {
              case 4:
                 invert(img);
                 break;
-            case 5: {
+           case 5: {
                 cout << "Enter second image file: ";
                 string fileName2;
                 cin >> fileName2;
-
                 while (!FileName(fileName2) || !ifstream(fileName2).good()) {
-
                     cout << "Error: Invalid file. Enter second image file: ";
-
                     cin >> fileName2;
                 }
                 img2.loadNewImage(fileName2);
 
-                mergeImages(img, img2);
+                int option;
+                cout << "Merge Option:\n";
+                cout << "1 - Resize to max size (larger image)\n";
+                cout << "2 - Resize to min size (smaller image)\n";
+                cout << "Enter option (1 or 2): ";
+                cin >> option;
+                while (option != 1 && option != 2) {
+                    cout << "Invalid option. Please enter 1 or 2: ";
+                    cin >> option;
+                }
+
+                img = mergeImages(img, img2, option);
+                cout << "Images merged .\n";
                 break;
             }
 
