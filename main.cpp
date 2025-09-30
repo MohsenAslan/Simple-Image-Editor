@@ -1,14 +1,17 @@
 //stud1 : 
    // Name: mariem badwey abdelstar
    // Id : 20242326
+   // Sec : x
    // Filter : 3 "invert" , 6 "rotate"
 //stud2 :
    // Name : mohsen mohamed mohsen
    // Id : 20242260
+   // Sec : x
    // Filter : 2 "black & white" , 5 "flip"
 //stud3
    // Name : eman saad mostafa
    // Id : 20242064
+   // Sec :  x
    // Filter : 1 "grayscale" , 4 "merge"
  
 
