@@ -275,7 +275,7 @@ Image mergeImages(Image &img1, Image &img2, int option) {
 
 bool FileName(const string &name) {
 
-    return (name.ends_with(".jpg") || name.ends_with(".bmp") || name.ends_with(".png"));
+    return (name.ends_with(".jpg") || name.ends_with(".bmp") || name.ends_with(".png")|| name.ends_with(".jpeg"));
 }
 
 void Menu() {
