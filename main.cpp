@@ -23,25 +23,25 @@ using namespace std;
 
 
 //filter11 resize 
-//viod resize (Image &img ,int newWidth,int newHeight ){
+viod resize (Image &img ,int newWidth,int newHeight ){
 
-  //  Image resized(newWidth, newHeight);
+    Image resized(newWidth, newHeight);
   
-    //float xr = (float) img.width / newWidth;
-    //float yr = (float) img.height / newHeight;
+    float xr = (float) img.width / newWidth;
+    float yr = (float) img.height / newHeight;
 
-   // for (int i = 0; i < newWidth; i++) {
-     //   for (int j = 0; j < newHeight; j++) {
-       //     int srcX = (int)(i * xr );
-         //   int srcY = (int)(j * yr );
+    for (int i = 0; i < newWidth; i++) {
+        for (int j = 0; j < newHeight; j++) {
+            int srcX = (int)(i * xr );
+            int srcY = (int)(j * yr );
 
-           // for (int k = 0; k < img.channels; k++) {
-             //   resized(j, i, k) = img(srcY, srcX, k);
-            //}
-        //}
-    //}
-    //img = resized;
-//}
+            for (int k = 0; k < img.channels; k++) {
+                resized(j, i, k) = img(srcY, srcX, k);
+            }
+        }
+    }
+    img = resized;
+}
 
 
 //filter2 black&white
@@ -170,23 +170,23 @@ void flipVertical(Image &img) {
     }
 }
 //filter8 crop
-//void crop(Image &img, int x, int y, int width, int height) {
+void crop(Image &img, int x, int y, int width, int height) {
     
-   // Image cropped(width, height);
+    Image cropped(width, height);
 
-   // for (int i = 0; i < width; i++) {
+    for (int i = 0; i < width; i++) {
         
-      //  for (int j = 0; j < height; j++) {
+        for (int j = 0; j < height; j++) {
             
-        //    for (int k = 0; k < img.channels; k++) {
+            for (int k = 0; k < img.channels; k++) {
                 
-              //  cropped(j, i, k) = img(y + j, x + i, k);
-          //  }
-        //}
-  //  }
+                cropped(j, i, k) = img(y + j, x + i, k);
+            }
+        }
+    }
 
-  //  img = cropped; 
-//}
+    img = cropped; 
+}
 
 
 //filter 1 grayscal
@@ -212,6 +212,26 @@ void toGray(Image &img) {
         }
     }
 }
+
+//Filter 13 sunlight fix
+void SunlightFix(Image &img, int brightnessValue) {
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            for (int k = 0; k < img.channels; k++) {
+                int newValue = img(i, j, k) + brightnessValue;
+                if (newValue > 255) newValue = 255;
+                if (newValue < 0) newValue = 0;
+                img(i, j, k) = newValue;
+            }
+        }
+    }
+}
+
+
+
+
+
+
 //filter 4 merge
 Image resize(Image &img, int newWidth, int newHeight) {
    
@@ -299,7 +319,13 @@ void Menu() {
 
     cout << "8. Save image\n";
 
-    cout << "9. Exit\n\n\n";
+    cout << "9. Exit\n";
+
+   cout << "10.Filter // Crop\n";
+
+   cout << "11.Filter // Resize\n";
+
+   cout << "12.Filter // SunlightFix\n";
 
 }
 
@@ -522,6 +548,40 @@ int main() {
 
                 break;
             }
+           case 10: {
+              int x,y,w,h;
+              
+              cout <<" Enter x, y, width, height : ";
+              cin >>x >>y >>w >>h;
+              
+              crop(img, x, y, w, h);
+              
+              cout<< " Crop is Done \n";
+              break;
+           }
+           case 11:{
+              int newW,newH;
+              cout << " Enter new width and height: ";
+              cin >> newW >> newH;
+              resize(img,newW,newH);
+              cout<< " Resize is Done. \n";
+              break;
+              
+           }
+           case 12:{
+              int brightness_val;
+              cout <<"Enter Brightness Value (recommended 30 ---> 80): ";
+              cin >> brightness_val;
+              SunlightFix(img,brightness_val);
+              cout <<"sunlight is fixed \n";
+              break;
+           }
+
+
+
+
+           
+           
           default: cout << "Invalid choice!\n"; break;
         }
     }
