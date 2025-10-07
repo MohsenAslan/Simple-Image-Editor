@@ -611,13 +611,14 @@ int main() {
               SunlightFix(img,brightness_val);
               cout <<"sunlight is fixed \n";
               break;
-           }
+           } 
            case 13:{
               detectEdges(img);
-    cout << "Edge detection applied.\n";
-    break;
-           }
+              cout << "Edge detection applied.\n";
+             break;
+               }
 
+          
 
 
 
