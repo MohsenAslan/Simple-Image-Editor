@@ -612,7 +612,7 @@ int main() {
               cout <<"sunlight is fixed \n";
               break;
            }
-           case 11:{
+           case 13:{
               detectEdges(img);
     cout << "Edge detection applied.\n";
     break;
