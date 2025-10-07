@@ -66,6 +66,40 @@ void blackWhite(Image &img) {
         }
     }
 }
+//filter 10 detect edges
+void detectEdges(Image& img) {
+    Image edges = img;
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            unsigned avg = 0;
+            for (int k = 0; k < 3; k++) {
+                avg += img(i, j, k);
+            }
+            avg /= 3;
+            for (int k = 0; k < 3; k++) {
+                img(i, j, k) = avg;
+            }
+        }
+    }
+    for (int i = 0; i < img.width - 1; i++) {
+        for (int j = 0; j < img.height - 1; j++) {
+            int current = img(i, j, 0);
+            int right = img(i + 1, j, 0);
+            int down = img(i, j + 1, 0);
+
+            int diff = abs(current - right) + abs(current - down);
+            int t = 50;
+
+            int edge_color = (diff > t) ? 0 : 255;
+
+            for (int k = 0; k < img.channels; k++) {
+                edges(i, j, k) = edge_color;
+            }
+        }
+    }
+    img = edges;
+}
+
 
 
 
@@ -326,6 +360,7 @@ void Menu() {
    cout << "11.Filter // Resize\n";
 
    cout << "12.Filter // SunlightFix\n";
+   cout<<" 13. Filter // detect edges\n";
 
 }
 
@@ -576,6 +611,11 @@ int main() {
               SunlightFix(img,brightness_val);
               cout <<"sunlight is fixed \n";
               break;
+           }
+           case 11:{
+              detectEdges(img);
+    cout << "Edge detection applied.\n";
+    break;
            }
 
 
