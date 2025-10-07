@@ -99,6 +99,59 @@ void detectEdges(Image& img) {
     }
     img = edges;
 }
+//filter 7
+void Darken_and_lighten(Image &image) {
+    int choice;
+    cout << "1 - Lighten the image\n";
+    cout << "2 - Darken the image\n";
+    cin >> choice;
+
+    if (choice != 1 && choice != 2) {
+        cout << "Wrong choice.\n";
+        return;
+    }
+
+    float factor = 0.5;
+    for (int i = 0; i < image.width; ++i) {
+        for (int j = 0; j < image.height; ++j) {
+            for (int k = 0; k < 3; ++k) {
+                unsigned char &p = image(i, j, k);
+                int newVal;
+
+                if (choice == 1) { // Lighten
+                    newVal = p + (p * factor);
+                    if (newVal > 255) newVal = 255;
+                } else { // Darken
+                    newVal = p - (p * factor);
+                    if (newVal < 0) newVal = 0;
+                }
+
+                p = static_cast<unsigned char>(newVal);
+            }
+        }
+    }
+
+}
+// Filter 15 - Infrared Effect bonus
+void toInfrared(Image &image) {
+    for (int i = 0; i < image.width; ++i) {
+        for (int j = 0; j < image.height; ++j) {
+            unsigned char r = image(i, j, 0);
+            unsigned char g = image(i, j, 1);
+            unsigned char b = image(i, j, 2);
+
+            unsigned char gray = (r + g + b) / 3;
+
+            image(i, j, 0) = 255;
+            image(i, j, 1) = 255 - gray;
+            image(i, j, 2) = 255 - gray;
+        }
+    }
+}
+
+
+
+
 
 
 
@@ -360,7 +413,12 @@ void Menu() {
    cout << "11.Filter // Resize\n";
 
    cout << "12.Filter // SunlightFix\n";
+   
    cout<<" 13. Filter // detect edges\n";
+   
+  cout << "14. Filter // Lighten or Darken\n";
+   
+  cout << "15. Filter // Infrared Effect\n";
 
 }
 
@@ -617,6 +675,16 @@ int main() {
               cout << "Edge detection applied.\n";
              break;
                }
+           case 14: {
+               Darken_and_lighten(img);
+               break;
+            } 
+           case 15: {
+                toInfrared(img);
+                cout << "Infrared filter applied.\n";
+                break;
+            }
+
 
           
 
