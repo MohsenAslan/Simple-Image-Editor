@@ -23,7 +23,7 @@ using namespace std;
 
 
 //filter11 resize 
-viod resize (Image &img ,int newWidth,int newHeight ){
+void resizeImage (Image &img ,int newWidth,int newHeight ){
 
     Image resized(newWidth, newHeight);
   
@@ -465,13 +465,14 @@ int main() {
                 if (choose == 'h' || choose == 'H') {
 
                     flipHorizontal(img);
-                    break;
+                    
                 }
                 else if (choose == 'v' || choose == 'V'){
 
                     flipVertical(img);
-                    break;
+                  
                 }
+               break;
             }
 
             case 7: {
@@ -563,7 +564,7 @@ int main() {
               int newW,newH;
               cout << " Enter new width and height: ";
               cin >> newW >> newH;
-              resize(img,newW,newH);
+              resizeImage(img,newW,newH);
               cout<< " Resize is Done. \n";
               break;
               
