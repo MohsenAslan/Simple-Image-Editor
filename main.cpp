@@ -1,18 +1,22 @@
 //stud1 : 
    // Name: mariem badwey abdelstar
    // Id : 20242326
-   // Sec : x
-   // Filter : 3 "invert" , 6 "rotate"
+   // Sec : S25&26
+   // Filter : 3 "invert" , 6 "rotate", 9 "Adding a Frame to the Picture" , 12 " Blur Images" , 16 "Wano looks so purple at night can you make Luffy look purple"
 //stud2 :
    // Name : mohsen mohamed mohsen
    // Id : 20242260
-   // Sec : x
-   // Filter : 2 "black & white" , 5 "flip"
+   // Sec : S25&26
+   // Filter : 2 "black & white" , 5 "flip" , 8 "Crop" , 11 " Resizing" , 13 "sunlight" 
 //stud3
    // Name : eman saad mostafa
    // Id : 20242064
-   // Sec :  x
-   // Filter : 1 "grayscale" , 4 "merge"
+   // Sec :  S25&26
+   // Filter : 1 "grayscale" , 4 "merge" , 7 "Darken and Lighten Image" , 10 "Detect Image Edges" , 17 "infrared photography"
+
+// Link the repo :: https://github.com/MohsenAslan/CS213_A1_20242064_20242260_20242326/edit/main/main.cpp
+// Link the document :: https://drive.google.com/file/d/10QBVazWokeW1sjoltu0BUnlQ4T25tUhU/view?usp=drivesdk
+// Link the video ::
  
 
 
