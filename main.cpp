@@ -16,7 +16,7 @@
 
 // Link the repo :: https://github.com/MohsenAslan/CS213_A1_20242064_20242260_20242326/edit/main/main.cpp
 // Link the document :: https://drive.google.com/file/d/10QBVazWokeW1sjoltu0BUnlQ4T25tUhU/view?usp=drivesdk
-// Link the video ::
+// Link the video :: https://drive.google.com/file/d/1zomyXUxnLMcLVCefNmvkJ8L3-DdY-y7Y/view?usp=drive_link
  
 
 
