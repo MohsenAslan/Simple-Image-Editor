@@ -403,7 +403,7 @@ Image mergeImages(Image &img1, Image &img2, int option) {
 
 // filter 9--> frame
 
-void complexFrame(Image &image) {
+void SimpleFrame(Image &image) {
     for (int x = 0; x < image.width; x++) {
         for (int y = 0; y < image.height; y++) {
             if (x<3||y<3||x>image.width-1-3||y>image.height-1-3) {
@@ -414,11 +414,11 @@ void complexFrame(Image &image) {
                 image(x,y,2)=255;
             }
             else if ((x<15&&x>=3)||(y<15&&y>=3)||(image.width-1-3>=x&&x>image.width-1-15)||(y>image.height-1-15&&y<=image.height-1-3)) {
-                image(x,y,0)=0;
+                image(x,y,0)=30;
 
-                image(x,y,1)=0;
+                image(x,y,1)=80;
 
-                image(x,y,2)=255;
+                image(x,y,2)=200;
             }
         }
     }
@@ -550,29 +550,188 @@ void complexFrame(Image &image) {
 }
 
 
-void simpleFrame(Image &image) {
-    for (int x = 0; x < image.width; x++) {
-        for (int y = 0; y < image.height; y++) {
-            if (x<5 || image.width-1-5<x|| y<5 || y>image.height - 1-5) {
-                image(x,y,0)=255;
 
-                image(x,y,1)=255;
 
-                image(x,y,2)=255;
+void DecorateImage(Image &image) {
+    for (int i=0; i<image.width; i++) {
+        for (int j=0; j<image.height; j++) {
+            if (i<2|j<2||i>image.width-1-2||j>image.height-1-2) {
+                image(i,j,0)=255;
+                image(i,j,1)=255;
+                image(i,j,2)=255;
             }
-            else if (x<25|| image.width-1-25<x|| y>image.height -1- 25|| y<25) {
-                image(x,y,0)=0;
+            else if ((i>=25&&i<=28)||(j>=25&&j<=28)||(i>=image.width-1-28&&i<=image.width-1-25)||(j>=image.height-1-28&&j<=image.height-1-25)){
 
-                image(x,y,1)=0;
+                image(i,j,0)=255;
+                image(i,j,1)=255;
+                image(i,j,2)=255;
+            }
+            else if (((i>=35&&i<=38)||(j>=35&&j<=38)||(i>=image.width-1-38&&i<=image.width-1-35)||(j>=image.height-1-38&&j<=image.height-1-35))) {
 
-                image(x,y,2)=255;
+                image(i,j,0)=255;
+                image(i,j,1)=255;
+                image(i,j,2)=255;
+
+
+            }
+
+            else if (i<25||j<25||i>image.width-1-25||j>image.height-1-25) {
+                image(i,j,0)=30;
+                image(i,j,1)=80;
+                image(i,j,2)=200;
             }
         }
     }
+    int x1=38 ,x2=52;
+    int y1=38 ,y2=52;
+    for (int x=x1;x<=x2;x++) {
+        for (int y=y1;y<=y2;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    int x3=image.width-1-38,y3=image.height-1-38;
+    int x4=image.width-1-52,y4=image.height-1-52;
+    for (int x=x4;x<=x3;x++) {
+        for (int y=y4;y<=y3;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    for (int x=x1;x<=x2;x++) {
+        for (int y=y4;y<=y3;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    for (int x=x4;x<=x3;x++) {
+        for (int y=y1;y<=y2;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
 
+    int x5=65,y5=65;
+    int x6=image.width-1-65,y6=image.height-1-65;
+    for (int x=x1;x<=x5;x++) {
+        image(x,y5,0)=255;
+        image(x,y5,1)=255;
+        image(x,y5,2)=255;
+    }
+    for (int y=y1;y<=y5;y++) {
+        image(x5,y,0)=255;
+        image(x5,y,1)=255;
+        image(x5,y,2)=255;
+    }
+    for (int x=x6;x<=x3;x++) {
+        image(x,y6,0)=255;
+        image(x,y6,1)=255;
+        image(x,y6,2)=255;
+
+    }
+    for (int y=y6;y<=y3;y++) {
+        image(x6,y,0)=255;
+        image(x6,y,1)=255;
+        image(x6,y,2)=255;
+
+    }
+    for (int x=x1;x<=x5;x++) {
+        image(x,y6,0)=255;
+        image(x,y6,1)=255;
+        image(x,y6,2)=255;
+    }
+    for (int y=y6;y<=y3;y++) {
+        image(x5,y,0)=255;
+        image(x5,y,1)=255;
+        image(x5,y,2)=255;
+
+    }
+    for (int x=x6;x<=x3;x++) {
+        image(x,y5,0)=255;
+        image(x,y5,1)=255;
+        image(x,y5,2)=255;
+    }
+    for (int y=y1;y<=y5;y++) {
+        image(x6,y,0)=255;
+        image(x6,y,1)=255;
+        image(x6,y,2)=255;
+
+    }
+    int x7=80,y7=80;
+    int x8=image.width-1-80,y8=image.height-1-80;
+    int x9=90,y9=90;
+    int x10=image.width-1-90,y10=image.height-1-90;
+    for (int x=x7;x<=x9;x++) {
+        for (int y=y1;y<=y9;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+
+        }
+    }
+    for (int x=x1;x<=x9;x++) {
+        for (int y=y7;y<=y9;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+
+        }
+    }
+    for (int x=x1;x<=x9;x++){
+        for (int y=y10;y<=y8;y++) {
+        image(x,y,0)=255;
+        image(x,y,1)=255;
+        image(x,y,2)=255;
+
+      }
+    }
+    for (int x=x7;x<=x9;x++) {
+        for (int y=y10;y<=y8;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    for (int x=x10;x<=x3;x++) {
+        for (int y=y7;y<=y9;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    for (int x=x7 ;x<=x9;x++) {
+        for (int y =y10 ; y<=y3;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    for (int x=x10;x<=x3;x++) {
+        for (int y=y10;y<=y8;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    for (int x=x10;x<=x8;x++) {
+        for (int y=y10;y<=y3;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
+    for (int x=x10;x<=x8;x++) {
+        for (int y=y1;y<=y9;y++) {
+            image(x,y,0)=255;
+            image(x,y,1)=255;
+            image(x,y,2)=255;
+        }
+    }
 }
-
-
 
 
 
@@ -945,16 +1104,16 @@ int main() {
                 break;
             }
            case 16 :{
-              cout << " What type of frame do you want ?\n 1--> simple\n 2--> complex\n";
+              cout << " What type of frame do you want ?\n 1--> simple\n 2--> Decorate\n";
               int frameChoice ;
               cin >> frameChoice ;
               if (frameChoice ==1){
-                 simpleFrame(img);
+                 SimpleFrame(img);
                  cout << "Simple Frame filter applied.\n";
               }
               else if (frameChoice == 2) {
-                  complexFrame(img);
-                  cout << "complex Frame filter applied.\n";
+                  DecorateImage(img);
+                  cout << "Decorate Frame filter applied.\n";
               }
                else{
                    cout << "Invalid frame choice \n";
