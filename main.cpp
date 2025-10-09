@@ -314,15 +314,36 @@ void toGray(Image &img) {
 }
 
 //Filter 13 sunlight fix
-void SunlightFix(Image &img, int brightnessValue) {
+void SunlightFix(Image &img, int brightness) {
+    if (brightness < 10) brightness = 10;
+    if (brightness > 80) brightness = 80;
+
     for (int i = 0; i < img.width; i++) {
         for (int j = 0; j < img.height; j++) {
-            for (int k = 0; k < img.channels; k++) {
-                int newValue = img(i, j, k) + brightnessValue;
-                if (newValue > 255) newValue = 255;
-                if (newValue < 0) newValue = 0;
-                img(i, j, k) = newValue;
-            }
+
+            int r = img(i, j, 0);
+            int g = img(i, j, 1);
+            int b = img(i, j, 2);
+
+           
+            r = r + brightness; if (r > 255) r = 255;
+            g = g + brightness; if (g > 255) g = 255;
+            b = b + brightness; if (b > 255) b = 255;
+
+            
+             r = (int)(r * 1.1); if (r > 255) r = 255;
+             g = (int)(g * 1.05); if (g > 255) g = 255;
+             b = (int)(b * 0.9); if (b < 0) b = 0;
+
+            
+            int avg = (r + g + b) / 3;
+             r = r + (r - avg) / 5; if (r > 255) r = 255;
+             g = g + (g - avg) / 5; if (g > 255) g = 255;
+             b = b + (b - avg) / 5; if (b > 255) b = 255;
+
+            img(i, j, 0) = r;
+            img(i, j, 1) = g;
+            img(i, j, 2) = b;
         }
     }
 }
